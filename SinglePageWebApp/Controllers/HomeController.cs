@@ -26,5 +26,10 @@ namespace OktaMvcSample.Controllers
 
             return View();
         }
+
+        public ActionResult AngularJS()
+        {
+            return View();
+        }
     }
 }

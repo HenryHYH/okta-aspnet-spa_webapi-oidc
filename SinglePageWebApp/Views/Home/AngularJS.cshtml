@@ -1,4 +1,4 @@
-﻿<div class="row">
+﻿<div class="row" ng-app="myApp">
     <div class="col-md-6" id="content-left">
         <p>
             This is a demonstration of how to use Okta to handle authentication for an ASP.NET "single page application".
@@ -27,6 +27,7 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js" ></script>
 <script type="text/javascript">
     var oktaOrgUrl = '@System.Web.Configuration.WebConfigurationManager.AppSettings["okta:TenantUrl"]';
     var webApiRootUrl = '@System.Web.Configuration.WebConfigurationManager.AppSettings["WebApiUrl"]';
@@ -34,6 +35,7 @@
 <script src="~/Scripts/single-page.js">
 </script>
 <script type="text/javascript">
+  
     function setupOktaSignIn(baseUrl, clientId) {
         return new OktaSignIn({
             baseUrl: baseUrl,
@@ -41,18 +43,17 @@
             authParams: {
                 responseType: 'id_token',
                 responseMode: 'okta_post_message',
-                scope: ['openid', 'profile', 'email', 'phone']
-            },
-            features: {
-                securityImage:true
+                scope: ['openid', 'profile', 'email']
             }
         });
     };
 
     var oktaSignIn = setupOktaSignIn(oktaOrgUrl, '@System.Web.Configuration.WebConfigurationManager.AppSettings["okta:ClientId"]');
-
-    $(document).ready(function () {
-        // defined in 'single-page.js'
-        renderOktaWidget();
+    angular.module('myApp', []).run(function () {
+        $(document).ready(function () {
+            // defined in 'single-page.js'
+            renderOktaWidget();
+        });
     });
+   
 </script>

@@ -1,4 +1,4 @@
-namespace Okta.Samples.OpenIdConnect.AspNet.Api.App_Start
+namespace Okta.Samples.OpenIdConnect.AspNet.Api
 {
     using System;
     using System.Collections.Generic;

@@ -38,4 +38,62 @@ namespace Okta.Samples.OpenIdConnect.AspNet.Api.Models
 
 
     }
+
+    [JsonObject(MemberSerialization.OptIn)]
+    public class OpenIdConfiguration
+    {
+        [JsonProperty("issuer")]
+        public string Issuer { get; set; }
+
+        [JsonProperty("authorization_endpoint")]
+        public string AuthorizationEndPoint { get; set; }
+
+        [JsonProperty("token_endpoint")]
+        public string TokenEndPoint { get; set; }
+
+        [JsonProperty("userinfo_endpoint")]
+        public string UserInfoEndPoint { get; set; }
+
+        [JsonProperty("jwks_uri")]
+        public string KeysUri { get; set; }
+
+        [JsonProperty("response_types_supported")]
+        public string[] ResponseTypesSupported { get; set; }
+
+        [JsonProperty("response_modes_supported")]
+        public string[] ResponseModesSupported { get; set; }
+
+        [JsonProperty("grant_types_supported")]
+        public string[] GrantTypesSupported { get; set; }
+
+        [JsonProperty("subject_types_supported")]
+        public string[] SubjectTypesSupported { get; set; }
+
+        [JsonProperty("id_token_signing_alg_values_supported")]
+        public string[] IdTokenAlgorithmValuesSupported { get; set; }
+
+        [JsonProperty("scopes_supported")]
+        public string[] ScopesSupported { get; set; }
+
+        [JsonProperty("token_endpoint_auth_methods_supported")]
+        public string[] TokenEndPointAuthMethodsSupported { get; set; }
+
+        [JsonProperty("claims_supported")]
+        public string[] ClaimsSupported { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 }

@@ -1,4 +1,4 @@
-using Okta.Samples.OpenIdConnect.AspNet.Api.App_Start;
+
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,6 +8,7 @@ using System.Net;
 using System.Text;
 using System.Web.Configuration;
 using System.Web.Http;
+using System.Runtime.Caching;
 
 namespace Okta.Samples.OpenIdConnect.AspNet.Api
 {
@@ -18,12 +19,10 @@ namespace Okta.Samples.OpenIdConnect.AspNet.Api
             // Web API configuration and services
             //config.EnableCors();
             config.EnableCors(new System.Web.Http.Cors.EnableCorsAttribute("*", "*", "*"));
-
             // Configure Web API to use only bearer token authentication.
             // Must reference OWIN libraries for the following 2 lines to work
             //config.SuppressDefaultHostAuthentication();
             //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-
 
             var clientID = WebConfigurationManager.AppSettings["okta:ClientId"];
             var issuer = WebConfigurationManager.AppSettings["okta:TenantUrl"];
@@ -36,8 +35,6 @@ namespace Okta.Samples.OpenIdConnect.AspNet.Api
                 Issuer = issuer
             });
 
-            getOktaCertPublicKey(issuer);
-
             // Web API routes
             config.MapHttpAttributeRoutes();
 
@@ -48,13 +45,49 @@ namespace Okta.Samples.OpenIdConnect.AspNet.Api
             );
         }
 
+
+        private static string getKeysUri(string strOktaTenantUrl)
+        {
+
+            string strKeysUrl = string.Empty;
+
+            WebRequest request = WebRequest.Create(string.Format("{0}/.well-known/openid-configuration", strOktaTenantUrl));
+
+            StreamReader reader = new StreamReader(request.GetResponse().GetResponseStream());
+
+            string responseFromServer = reader.ReadToEnd();
+            try
+            {
+                Models.OpenIdConfiguration openidConfig = JsonConvert.DeserializeObject<Models.OpenIdConfiguration>(responseFromServer);
+                if (openidConfig != null && openidConfig.KeysUri != null)
+                {
+                    strKeysUrl = openidConfig.KeysUri;
+                }
+            }
+            catch (Exception ex)
+            {
+                string str = ex.ToString();
+            }
+
+            return strKeysUrl;
+
+        }
+
         private static string getOktaCertPublicKey(string strOktaTenantUrl)
         {
             string strCertPublicKey = string.Empty;
+
+            //If the data exists in cache, pull it from there, otherwise make a call to database to get the data
+            ObjectCache cache = MemoryCache.Default;
+
+            strCertPublicKey = cache.Get("OktaCertPublicKey") as string;
+            if (strCertPublicKey != null)
+                return strCertPublicKey;
+
+            string strKeysUrl = getKeysUri(strOktaTenantUrl);
             // The request will be made to the authentication server.
-            WebRequest request = WebRequest.Create(
-                string.Format("{0}/oauth2/v1/keys", strOktaTenantUrl)
-            );
+            //WebRequest request = WebRequest.Create(string.Format("{0}/oauth2/v1/keys", strOktaTenantUrl));
+            WebRequest request = WebRequest.Create(strKeysUrl);
 
             StreamReader reader = new StreamReader(request.GetResponse().GetResponseStream());
 
@@ -71,6 +104,10 @@ namespace Okta.Samples.OpenIdConnect.AspNet.Api
             {
                 string str = ex.ToString();
             }
+
+            //adding the certificate to the cache
+            CacheItemPolicy policy = new CacheItemPolicy { AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(180) };
+            cache.Add("OktaCertPublicKey", strCertPublicKey, policy);
 
             return strCertPublicKey;
         }

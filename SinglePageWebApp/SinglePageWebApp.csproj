@@ -206,6 +206,7 @@
     <Content Include="Scripts\single-page.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="SinglePageWebApp.wpp.targets" />
+    <Content Include="Views\Home\AngularJS.cshtml" />
     <None Include="Web.config" />
     <None Include="Web.template.config" />
     <None Include="Web.dev.Debug.config">
