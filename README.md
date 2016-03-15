@@ -1,5 +1,3 @@
-"# okta-aspnet-spa_webapi-oidc" 
-
 #Introduction
 This code sample demonstrates how to use Okta's OpenID Connect implementation with an ASP.NET Single Page Application calling an ASP.NET Web API.
 
