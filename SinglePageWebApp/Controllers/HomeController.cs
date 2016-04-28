@@ -31,5 +31,10 @@ namespace OktaMvcSample.Controllers
         {
             return View();
         }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
     }
 }

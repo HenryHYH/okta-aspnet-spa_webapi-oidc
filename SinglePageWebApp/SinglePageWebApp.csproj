@@ -18,10 +18,10 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressSSLPort>443</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -180,17 +180,121 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\chipbackground-original.jpg" />
     <Content Include="Content\Images\locked-screen.png" />
     <Content Include="Content\Images\top-secret.png" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\font-awesome\css\font-awesome.css" />
+    <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\git.png" />
+    <Content Include="images\less.png" />
+    <Content Include="images\okta.png" />
+    <Content Include="images\responsive.png" />
+    <Content Include="images\SFbayBridge.jpg" />
+    <Content Include="images\star.png" />
+    <Content Include="images\ui.totop.png" />
+    <Content Include="js\collapser.js" />
+    <Content Include="js\contact_form.js" />
+    <Content Include="js\easing.js" />
+    <Content Include="js\isotope\css\style.css" />
+    <Content Include="js\isotope\jquery.isotope.js" />
+    <Content Include="js\isotope\jquery.isotope.min.js" />
+    <Content Include="js\jquery-1.9.0.min.js" />
+    <Content Include="js\jquery.mb.YTPlayer.js" />
+    <Content Include="js\jquery.ui.totop.js" />
+    <Content Include="js\modernizr.custom.48287.js" />
+    <Content Include="js\parallax.min.js" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\dark_rounded\btnNext.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\dark_rounded\btnPrevious.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\dark_rounded\contentPattern.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\dark_rounded\default_thumbnail.gif" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\dark_rounded\loader.gif" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\dark_rounded\sprite.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\dark_square\btnNext.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\dark_square\btnPrevious.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\dark_square\contentPattern.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\dark_square\default_thumbnail.gif" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\dark_square\loader.gif" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\dark_square\sprite.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\default\default_thumb.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\default\loader.gif" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\default\sprite.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\default\sprite_next.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\default\sprite_prev.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\default\sprite_x.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\default\sprite_y.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\facebook\btnNext.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\facebook\btnPrevious.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\facebook\contentPatternBottom.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\facebook\contentPatternLeft.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\facebook\contentPatternRight.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\facebook\contentPatternTop.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\facebook\default_thumbnail.gif" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\facebook\loader.gif" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\facebook\sprite.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\light_rounded\btnNext.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\light_rounded\btnPrevious.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\light_rounded\default_thumbnail.gif" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\light_rounded\loader.gif" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\light_rounded\sprite.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\light_square\btnNext.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\light_square\btnPrevious.png" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\light_square\default_thumbnail.gif" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\light_square\loader.gif" />
+    <Content Include="js\prettyPhoto_3.1.5\images\prettyPhoto\light_square\sprite.png" />
+    <Content Include="js\prettyPhoto_3.1.5\jquery.prettyPhoto.js" />
+    <Content Include="js\prettyPhoto_3.1.5\prettyPhoto.css" />
+    <Content Include="js\restart_theme.js" />
+    <Content Include="js\snap.svg-min.js" />
+    <Content Include="js\woothemes-FlexSlider-06b12f8\flexslider.css" />
+    <Content Include="js\woothemes-FlexSlider-06b12f8\flexslider_original.css" />
+    <Content Include="js\woothemes-FlexSlider-06b12f8\images\bg_direction_nav.png" />
+    <Content Include="js\woothemes-FlexSlider-06b12f8\images\luna-controls.png" />
+    <Content Include="js\woothemes-FlexSlider-06b12f8\jquery.flexslider-min.js" />
+    <Content Include="js\woothemes-FlexSlider-06b12f8\jquery.flexslider.js" />
+    <Content Include="js\wow.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="fonts\font-awesome\less\bordered-pulled.less" />
+    <Content Include="fonts\font-awesome\less\core.less" />
+    <Content Include="fonts\font-awesome\less\fixed-width.less" />
+    <Content Include="fonts\font-awesome\less\font-awesome.less" />
+    <Content Include="fonts\font-awesome\less\icons.less" />
+    <Content Include="fonts\font-awesome\less\larger.less" />
+    <Content Include="fonts\font-awesome\less\list.less" />
+    <Content Include="fonts\font-awesome\less\mixins.less" />
+    <Content Include="fonts\font-awesome\less\path.less" />
+    <Content Include="fonts\font-awesome\less\rotated-flipped.less" />
+    <Content Include="fonts\font-awesome\less\spinning.less" />
+    <Content Include="fonts\font-awesome\less\stacked.less" />
+    <Content Include="fonts\font-awesome\less\variables.less" />
+    <Content Include="fonts\font-awesome\scss\font-awesome.scss" />
+    <Content Include="fonts\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="fonts\font-awesome\scss\_core.scss" />
+    <Content Include="fonts\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="fonts\font-awesome\scss\_icons.scss" />
+    <Content Include="fonts\font-awesome\scss\_larger.scss" />
+    <Content Include="fonts\font-awesome\scss\_list.scss" />
+    <Content Include="fonts\font-awesome\scss\_mixins.scss" />
+    <Content Include="fonts\font-awesome\scss\_path.scss" />
+    <Content Include="fonts\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="fonts\font-awesome\scss\_spinning.scss" />
+    <Content Include="fonts\font-awesome\scss\_stacked.scss" />
+    <Content Include="fonts\font-awesome\scss\_variables.scss" />
+    <Content Include="less\custom_variables.less" />
+    <Content Include="less\style.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -201,19 +305,105 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js.cookie.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\okta-sign-in.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\single-page.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="SinglePageWebApp.wpp.targets" />
+    <Content Include="twitter-bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="twitter-bootstrap\js\bootstrap.js" />
+    <Content Include="twitter-bootstrap\js\bootstrap.min.js" />
     <Content Include="Views\Home\AngularJS.cshtml" />
-    <None Include="Web.config" />
+    <Content Include="twitter-bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="twitter-bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="twitter-bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="twitter-bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="twitter-bootstrap\less\.csscomb.json" />
+    <Content Include="twitter-bootstrap\less\.csslintrc" />
+    <Content Include="twitter-bootstrap\less\alerts.less" />
+    <Content Include="twitter-bootstrap\less\badges.less" />
+    <Content Include="twitter-bootstrap\less\bootstrap.less" />
+    <Content Include="twitter-bootstrap\less\breadcrumbs.less" />
+    <Content Include="twitter-bootstrap\less\button-groups.less" />
+    <Content Include="twitter-bootstrap\less\buttons.less" />
+    <Content Include="twitter-bootstrap\less\carousel.less" />
+    <Content Include="twitter-bootstrap\less\close.less" />
+    <Content Include="twitter-bootstrap\less\code.less" />
+    <Content Include="twitter-bootstrap\less\component-animations.less" />
+    <Content Include="twitter-bootstrap\less\dropdowns.less" />
+    <Content Include="twitter-bootstrap\less\forms.less" />
+    <Content Include="twitter-bootstrap\less\glyphicons.less" />
+    <Content Include="twitter-bootstrap\less\grid.less" />
+    <Content Include="twitter-bootstrap\less\input-groups.less" />
+    <Content Include="twitter-bootstrap\less\jumbotron.less" />
+    <Content Include="twitter-bootstrap\less\labels.less" />
+    <Content Include="twitter-bootstrap\less\list-group.less" />
+    <Content Include="twitter-bootstrap\less\media.less" />
+    <Content Include="twitter-bootstrap\less\mixins.less" />
+    <Content Include="twitter-bootstrap\less\mixins\alerts.less" />
+    <Content Include="twitter-bootstrap\less\mixins\background-variant.less" />
+    <Content Include="twitter-bootstrap\less\mixins\border-radius.less" />
+    <Content Include="twitter-bootstrap\less\mixins\buttons.less" />
+    <Content Include="twitter-bootstrap\less\mixins\center-block.less" />
+    <Content Include="twitter-bootstrap\less\mixins\clearfix.less" />
+    <Content Include="twitter-bootstrap\less\mixins\forms.less" />
+    <Content Include="twitter-bootstrap\less\mixins\gradients.less" />
+    <Content Include="twitter-bootstrap\less\mixins\grid-framework.less" />
+    <Content Include="twitter-bootstrap\less\mixins\grid.less" />
+    <Content Include="twitter-bootstrap\less\mixins\hide-text.less" />
+    <Content Include="twitter-bootstrap\less\mixins\image.less" />
+    <Content Include="twitter-bootstrap\less\mixins\labels.less" />
+    <Content Include="twitter-bootstrap\less\mixins\list-group.less" />
+    <Content Include="twitter-bootstrap\less\mixins\nav-divider.less" />
+    <Content Include="twitter-bootstrap\less\mixins\nav-vertical-align.less" />
+    <Content Include="twitter-bootstrap\less\mixins\opacity.less" />
+    <Content Include="twitter-bootstrap\less\mixins\pagination.less" />
+    <Content Include="twitter-bootstrap\less\mixins\panels.less" />
+    <Content Include="twitter-bootstrap\less\mixins\progress-bar.less" />
+    <Content Include="twitter-bootstrap\less\mixins\reset-filter.less" />
+    <Content Include="twitter-bootstrap\less\mixins\resize.less" />
+    <Content Include="twitter-bootstrap\less\mixins\responsive-visibility.less" />
+    <Content Include="twitter-bootstrap\less\mixins\size.less" />
+    <Content Include="twitter-bootstrap\less\mixins\tab-focus.less" />
+    <Content Include="twitter-bootstrap\less\mixins\table-row.less" />
+    <Content Include="twitter-bootstrap\less\mixins\text-emphasis.less" />
+    <Content Include="twitter-bootstrap\less\mixins\text-overflow.less" />
+    <Content Include="twitter-bootstrap\less\mixins\vendor-prefixes.less" />
+    <Content Include="twitter-bootstrap\less\modals.less" />
+    <Content Include="twitter-bootstrap\less\navbar.less" />
+    <Content Include="twitter-bootstrap\less\navs.less" />
+    <Content Include="twitter-bootstrap\less\normalize.less" />
+    <Content Include="twitter-bootstrap\less\pager.less" />
+    <Content Include="twitter-bootstrap\less\pagination.less" />
+    <Content Include="twitter-bootstrap\less\panels.less" />
+    <Content Include="twitter-bootstrap\less\popovers.less" />
+    <Content Include="twitter-bootstrap\less\print.less" />
+    <Content Include="twitter-bootstrap\less\progress-bars.less" />
+    <Content Include="twitter-bootstrap\less\responsive-embed.less" />
+    <Content Include="twitter-bootstrap\less\responsive-utilities.less" />
+    <Content Include="twitter-bootstrap\less\scaffolding.less" />
+    <Content Include="twitter-bootstrap\less\tables.less" />
+    <Content Include="twitter-bootstrap\less\theme.less" />
+    <Content Include="twitter-bootstrap\less\thumbnails.less" />
+    <Content Include="twitter-bootstrap\less\tooltip.less" />
+    <Content Include="twitter-bootstrap\less\type.less" />
+    <Content Include="twitter-bootstrap\less\utilities.less" />
+    <Content Include="twitter-bootstrap\less\variables.less" />
+    <Content Include="twitter-bootstrap\less\wells.less" />
+    <Content Include="Views\Home\OldIndex.cshtml" />
+    <Content Include="Views\Shared\_Layout - Original.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <None Include="Web.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web.template.config" />
     <None Include="Web.dev.Debug.config">
       <DependentUpon>Web.template.config</DependentUpon>
     </None>
     <None Include="Web.dev.Release.config">
       <DependentUpon>Web.template.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />

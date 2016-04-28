@@ -3,3 +3,12 @@
 ################################################################################
 
 /packages
+/SinglePageWebApp/bin
+/SinglePageWebApp/obj
+/WebApi/bin
+/WebApi/obj
+/SinglePageWebApp/web.config
+/SinglePageWebApp/Web.dev.Debug.config
+/WebApi/web.config
+/WebApi/web.dev.debug.config
+/.vs/config/applicationhost.config

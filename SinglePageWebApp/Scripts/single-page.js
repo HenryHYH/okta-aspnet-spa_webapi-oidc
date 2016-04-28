@@ -4,7 +4,37 @@ var userLoginKey = 'userLogin';
 
 
 function renderOktaWidget() {
-    if (!callSessionsMe()) {
+    oktaSessionsMe(function (authenticated) {
+        console.log('Is user authenticated? ' + authenticated);
+        if (!authenticated) {
+            showAuthUI(false, "");
+            oktaSignIn.renderEl(
+                { el: '#okta-sign-in-widget' },
+                function (res) {
+                    if (res.status === 'SUCCESS') {
+                        console.log(res);
+                        var id_token = res.id_token || res.idToken;
+                        console.log('id token: ' + id_token);
+                        sessionStorage.setItem(idTokenKey, id_token);
+                        sessionStorage.setItem(userLoginKey, res.claims.preferred_username);
+                        showAuthUI(true, res.claims.preferred_username);
+                    }
+                },
+                function (err) { console.log('Unexpected error authenticating user: %o', err); }
+            );
+        }
+        else {
+            var userLogin = sessionStorage.getItem(userLoginKey);
+            if (userLogin) {
+                console.log('user Login is ' + userLogin);
+            }
+            showAuthUI(true, userLogin);
+        }
+    });
+
+
+
+    /*if (!callSessionsMe()) {
         console.log('user not authenticated: showing the sign-in widget');
         showAuthUI(false, "");
         oktaSignIn.renderEl(
@@ -28,7 +58,7 @@ function renderOktaWidget() {
             console.log('user Login is ' + userLogin);
         }
         showAuthUI(true, userLogin);
-    }
+    }*/
 }
 
 function showAuthUI(isAuthenticated, user_id) {
@@ -111,36 +141,32 @@ function callUserInfo() {
 }
 
 function callSessionsMe() {
-    var bSuccess = false;
-    $.ajax({
-        type: "GET",
-        dataType: 'json',
-        url: oktaOrgUrl + "/api/v1/sessions/me",
-        xhrFields: {
-            withCredentials: true
-        },
-        success: function (data) {
-            //console.log('setting success to true');
-            bSuccess = true;
-            console.log("My session: ");
-            console.log(data);
-            sessionStorage.setItem(sessionTokenKey, JSON.stringify(data));
-            
-            //$('#logged-in-res').text(data);
-        },
-        error: function (textStatus, errorThrown) {
-            //console.log('setting success to false');
-            //$('#logged-in-res').text("You must be logged in to call this API");
-        },
-        async: false
+    oktaSessionsMe(function (authenticated) {
+        console.log('Is user authenticated? ' + authenticated);
+        return authenticated;
     });
-    console.log('Is user authenticated? ' + bSuccess);
-    return bSuccess;
 }
 
 function signOut() {
     console.log('signing out');
-    if (callSessionsMe()) {
+    oktaSessionsMe(function (authenticated) {
+        if (authenticated) {
+            var sessionToken;
+            var sessionTokenString = sessionStorage.getItem(sessionTokenKey);
+            if (sessionTokenString) {
+                sessionToken = JSON.parse(sessionTokenString);
+                console.log(sessionToken);
+                var sessionId = sessionToken.id;
+                console.log('closing session ' + sessionId);
+                closeSession(function (success) {
+                    console.log('Is session closed? ' + success);
+                    if(success)
+                        renderOktaWidget();
+                })
+            }
+        }
+    });
+    /*if (callSessionsMe()) {
         var sessionToken;
         var sessionTokenString = sessionStorage.getItem(sessionTokenKey);
         if (sessionTokenString) {
@@ -178,7 +204,62 @@ function signOut() {
                 async: false
             });
         }
-    }
-    //
+    }*/
 }
 
+function oktaSessionsMe(callBack) {
+    $.ajax({
+        type: "GET",
+        dataType: 'json',
+        url: oktaOrgUrl + "/api/v1/sessions/me",
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            console.log('setting success to true');
+            console.log("My session: ");
+            console.log(data);
+            sessionStorage.setItem(sessionTokenKey, JSON.stringify(data));
+            return callBack(true);
+            //$('#logged-in-res').text(data);
+        },
+        error: function (textStatus, errorThrown) {
+            console.log('setting success to false');
+            //$('#logged-in-res').text("You must be logged in to call this API");
+            return callBack(false);
+        },
+        async: true
+    });
+}
+
+function closeSession(callback) {
+    $.ajax({
+        type: "DELETE",
+        dataType: 'json',
+        url: oktaOrgUrl + "/api/v1/sessions/me",
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            console.log('success deleting session');
+            console.log(data);
+            console.log('removing session from sessionStorage');
+            sessionStorage.removeItem(sessionTokenKey);
+            console.log('removed session from sessionStorage');
+            console.log('removing user Login from sessionStorage');
+            sessionStorage.removeItem(userLoginKey);
+            console.log('removed user Login from sessionStorage');
+            console.log('removing id Token from sessionStorage');
+            sessionStorage.removeItem(idTokenKey);
+            console.log('removed id Token from sessionStorage');
+            $('#logged-in-res').text('');
+            return callback(true);
+        },
+        error: function (textStatus, errorThrown) {
+            console.log('error deleting session: ' + JSON.stringify(textStatus));
+            console.log(errorThrown);
+            return callback(false);
+        },
+        async: true
+    });
+}
