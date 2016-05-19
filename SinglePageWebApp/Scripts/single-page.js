@@ -31,34 +31,6 @@ function renderOktaWidget() {
             showAuthUI(true, userLogin);
         }
     });
-
-
-
-    /*if (!callSessionsMe()) {
-        console.log('user not authenticated: showing the sign-in widget');
-        showAuthUI(false, "");
-        oktaSignIn.renderEl(
-            { el: '#okta-sign-in-widget' },
-            function (res) {
-                if (res.status === 'SUCCESS') {
-                    console.log(res);
-                    var id_token = res.id_token || res.idToken;
-                    console.log('id token: ' + id_token);
-                    sessionStorage.setItem(idTokenKey, id_token);
-                    sessionStorage.setItem(userLoginKey, res.claims.preferred_username);
-                    showAuthUI(true, res.claims.preferred_username);
-                }
-            },
-            function (err) { console.log('Unexpected error authenticating user: %o', err); }
-        );
-    }
-    else {
-        var userLogin = sessionStorage.getItem(userLoginKey);
-        if (userLogin) {
-            console.log('user Login is ' + userLogin);
-        }
-        showAuthUI(true, userLogin);
-    }*/
 }
 
 function showAuthUI(isAuthenticated, user_id) {
@@ -140,12 +112,20 @@ function callUserInfo() {
     });
 }
 
+function callUsersMe() {
+    oktaUsersMe(function (authenticated) {
+        console.log('Is user authenticated? ' + authenticated);
+        return authenticated;
+    });
+}
+
 function callSessionsMe() {
     oktaSessionsMe(function (authenticated) {
         console.log('Is user authenticated? ' + authenticated);
         return authenticated;
     });
 }
+
 
 function signOut() {
     console.log('signing out');
@@ -166,45 +146,7 @@ function signOut() {
             }
         }
     });
-    /*if (callSessionsMe()) {
-        var sessionToken;
-        var sessionTokenString = sessionStorage.getItem(sessionTokenKey);
-        if (sessionTokenString) {
-            sessionToken = JSON.parse(sessionTokenString);
-            console.log(sessionToken);
-
-            var sessionId = sessionToken.id;
-            console.log('closing session ' + sessionId);
-            $.ajax({
-                type: "DELETE",
-                dataType: 'json',
-                url: oktaOrgUrl + "/api/v1/sessions/me",
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function (data) {
-                    console.log('success deleting session');
-                    console.log(data);
-                    console.log('removing session from sessionStorage');
-                    sessionStorage.removeItem(sessionTokenKey);
-                    console.log('removed session from sessionStorage');
-                    console.log('removing user Login from sessionStorage');
-                    sessionStorage.removeItem(userLoginKey);
-                    console.log('removed user Login from sessionStorage');
-                    console.log('removing id Token from sessionStorage');
-                    sessionStorage.removeItem(idTokenKey);
-                    console.log('removed id Token from sessionStorage');
-                    $('#logged-in-res').text('');
-                    renderOktaWidget();
-                },
-                error: function (textStatus, errorThrown) {
-                    console.log('error deleting session: ' + JSON.stringify(textStatus));
-                    console.log(errorThrown);
-                },
-                async: false
-            });
-        }
-    }*/
+   
 }
 
 function oktaSessionsMe(callBack) {
@@ -226,6 +168,26 @@ function oktaSessionsMe(callBack) {
         error: function (textStatus, errorThrown) {
             console.log('setting success to false');
             //$('#logged-in-res').text("You must be logged in to call this API");
+            return callBack(false);
+        },
+        async: true
+    });
+}
+
+
+function oktaUsersMe(callBack) {
+    $.ajax({
+        type: "GET",
+        dataType: 'json',
+        url: oktaOrgUrl + "/api/v1/users/me",
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            console.log(data);
+            return callBack(true);
+        },
+        error: function (textStatus, errorThrown) {
             return callBack(false);
         },
         async: true

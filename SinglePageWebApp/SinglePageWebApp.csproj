@@ -200,7 +200,7 @@
     <Content Include="images\responsive.png" />
     <Content Include="images\SFbayBridge.jpg" />
     <Content Include="images\star.png" />
-    <Content Include="images\ui.totop.png" />
+    <Content Include="Content\Images\ui.totop.png" />
     <Content Include="js\collapser.js" />
     <Content Include="js\contact_form.js" />
     <Content Include="js\easing.js" />

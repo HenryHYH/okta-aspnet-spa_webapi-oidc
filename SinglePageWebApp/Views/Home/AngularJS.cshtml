@@ -1,59 +1,116 @@
-﻿<div class="row" ng-app="myApp">
-    <div class="col-md-6" id="content-left">
-        <p>
-            This is a demonstration of how to use Okta to handle authentication for an ASP.NET "single page application".
-        </p>
-        <div id="logged-out-message">
-            <!-- Source: http://openclipart.org/detail/34273/tango-system-lock-screen-by-warszawianka -->
-            <img src="~/Content/Images/locked-screen.png" alt="Locked computer screen" />
+﻿@{
+    ViewBag.Title = "AngularJS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.0.1/okta-auth-js-1.0.1.min.js"></script>
+<link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/css/okta-sign-in-1.2.0.min.css" type="text/css" rel="stylesheet">
+<link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/css/okta-theme-1.2.0.css" type="text/css" rel="stylesheet">
+
+<div ng-app="myApp" ng-controller="myCtrl">
+    <div class="auth-content" style="max-width:300px">
+        <div class="auth-content-inner">
+            <div class="primary-auth">
+                <div data-se="o-form-content" class="o-form-content o-form-theme clearfix">
+                    <h2 data-se="o-form-head" class="okta-form-title o-form-head">Custom Sign In with Okta JavaScript SDK</h2>
+                    <div class="o-form-error-container" data-se="o-form-error-container"></div>
+                    <div class="o-form-fieldset-container" data-se="o-form-fieldset-container">
+                        <div data-se="o-form-fieldset" class="o-form-fieldset o-form-label-top">
+                            <div data-se="o-form-input-container" class="o-form-input">
+                                <span data-se="o-form-input-username" class="okta-form-input-field input-fix o-form-control">
+                                    <input type="text" placeholder="Username" ng-model="userName" name="username">
+                                </span>
+                            </div>
+                        </div>
+                        <div data-se="o-form-fieldset" class="o-form-fieldset o-form-label-top">
+                            <div data-se="o-form-input-container" class="o-form-input">
+                                <span data-se="o-form-input-password" class="okta-form-input-field input-fix o-form-control">
+                                    <input type="password" placeholder="Password" ng-model="password">
+                                </span>
+                            </div>
+                        </div>
+                        <div data-se="o-form-fieldset" class="o-form-fieldset o-form-label-top margin-btm-0">
+                            <div class="o-form-button-bar">
+                                <button ng-click="loginFunction()">Log In</button><button ng-click="logoutFunction()">Log Out</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="auth-footer"></div>
+            </div>
         </div>
 
-        <div id="logged-in-message" style="display: none;">
-            <img src="~/Content/Images/top-secret.png" alt="TOP SECRET" />
-            @*<button class="btn btn-lg btn-primary" onclick="callUserInfo()">Call OAuth UserInfo</button>*@
-        </div>
-        <div id="apicall-buttoms">
-            <h1><span id="logged-in-res"></span></h1>
-            <button class="btn btn-lg btn-primary" onclick="callUnsecureWebApi()">Unsecure API</button>
-            <button class="btn btn-lg btn-primary" onclick="callSecureWebApi()">Secure API</button>
-            @*<button class="btn btn-lg btn-primary" onclick="callUserInfo()">User Info</button>*@
-            @*<button class="btn btn-lg btn-primary" onclick="callSessionsMe()">My Session</button>*@
-        </div>
+        <p>userName: '{{userName}}'</p>
+        <p>Okta Session Token:  '{{oktaSessionToken}}'</p>
     </div>
-    <div class="col-md-6" id="content-right">
-        <div id="okta-sign-in-widget" style="margin-top: 0px"></div>
-        <div id="logged-in-user-id" style="display: none;">
-            <p>Logged in as User ID: <span id="okta-user-id"></span></p>
-        </div>
-    </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js" ></script>
-<script type="text/javascript">
-    var oktaOrgUrl = '@System.Web.Configuration.WebConfigurationManager.AppSettings["okta:TenantUrl"]';
-    var webApiRootUrl = '@System.Web.Configuration.WebConfigurationManager.AppSettings["WebApiUrl"]';
-</script>
-<script src="~/Scripts/single-page.js">
-</script>
-<script type="text/javascript">
-  
-    function setupOktaSignIn(baseUrl, clientId) {
-        return new OktaSignIn({
-            baseUrl: baseUrl,
-            clientId: clientId,
-            authParams: {
-                responseType: 'id_token',
-                responseMode: 'okta_post_message',
-                scope: ['openid', 'profile', 'email']
-            }
-        });
-    };
 
-    var oktaSignIn = setupOktaSignIn(oktaOrgUrl, '@System.Web.Configuration.WebConfigurationManager.AppSettings["okta:ClientId"]');
-    angular.module('myApp', []).run(function () {
-        $(document).ready(function () {
-            // defined in 'single-page.js'
-            renderOktaWidget();
-        });
-    });
-   
-</script>
+    <script>
+app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.userName = "";
+    $scope.password = "";
+    $scope.oktaSessionToken = "";
+
+    $scope.loginFunction = function() {
+
+        authClient = new OktaAuth({ url: 'https://netsdktests.oktapreview.com' });
+
+		authClient.signIn({
+  			username: $scope.userName,
+  			password: $scope.password
+		})
+		.then(function(transaction) {
+			console.log("transaction = " + Object.prototype.toString.call(transaction));
+  			switch(transaction.status) {
+
+    			case 'SUCCESS':
+    				$scope.oktaSessionToken = transaction.sessionToken;
+				console.log("oktaSessionToken = " + $scope.oktaSessionToken);
+				console.log("Transaction status: " + transaction.status);
+				$scope.$apply();
+      				break;
+
+    			default:
+      				throw 'Error status' + transaction.status + ' was thrown';
+  			}
+		})
+		.fail(function(err) {
+  			console.error(err);
+  		})
+
+
+
+    }
+
+    $scope.logoutFunction = function() {
+             authClient.signOut()
+             .then(function(transaction)  {
+
+		   switch(transaction.status) {
+
+             	   case 'SUCCESS':
+
+                                console.log("Issued logout for session Token : " + $scope.oktaSessionToken);
+                                console.log("Transaction status: " + transaction.status);
+				$scope.oktaSessionToken = null;
+				$scope.$apply();
+                                break;
+
+                   default:
+                                throw 'Error status' + transaction.status + ' was thrown';
+                        }
+                })
+                .fail(function(err) {
+                        console.error(err);
+                })
+
+    }
+
+
+});
+    </script>
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
