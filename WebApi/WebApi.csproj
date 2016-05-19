@@ -49,8 +49,8 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Okta.Core, Version=0.2.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Okta.Core.Client.0.2.2.0\lib\Okta.Core.dll</HintPath>
+    <Reference Include="Okta.Core, Version=0.2.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Okta.Core.Client.0.2.9.0\lib\Okta.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
