@@ -3,12 +3,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.0.1/okta-auth-js-1.0.1.min.js"></script>
+<script src="/js/okta-auth-js-1.0.2.js"></script>
+@*<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.0.1/okta-auth-js-1.0.1.min.js"></script>*@
 <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/css/okta-sign-in-1.2.0.min.css" type="text/css" rel="stylesheet">
 <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.2.0/css/okta-theme-1.2.0.css" type="text/css" rel="stylesheet">
 
 <div ng-app="myApp" ng-controller="myCtrl">
-    <div class="auth-content" style="max-width:300px">
+    <div class="auth-content" style="max-width:400px">
         <div class="auth-content-inner">
             <div class="primary-auth">
                 <div data-se="o-form-content" class="o-form-content o-form-theme clearfix">
@@ -31,7 +32,7 @@
                         </div>
                         <div data-se="o-form-fieldset" class="o-form-fieldset o-form-label-top margin-btm-0">
                             <div class="o-form-button-bar">
-                                <button ng-click="loginFunction()">Log In</button><button ng-click="logoutFunction()">Log Out</button>
+                                <button ng-click="loginFunction()">Log In</button><button ng-click="getUser()">Get User Info</button><button ng-click="logoutFunction()">Log Out</button>
                             </div>
                         </div>
                     </div>
@@ -45,72 +46,106 @@
     </div>
 
     <script>
-app = angular.module('myApp', []);
-app.controller('myCtrl', function($scope) {
-    $scope.userName = "";
-    $scope.password = "";
-    $scope.oktaSessionToken = "";
+        var oktaOrgUrl = '@System.Web.Configuration.WebConfigurationManager.AppSettings["okta:TenantUrl"]';
+        var oidcClientId = '@System.Web.Configuration.WebConfigurationManager.AppSettings["okta:ClientId"]';
+        app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope) {
+            $scope.userName = "";
+            $scope.password = "";
+            $scope.oktaSessionToken = "";
 
-    $scope.loginFunction = function() {
+            $scope.loginFunction = function () {
 
-        authClient = new OktaAuth({ url: 'https://netsdktests.oktapreview.com' });
+                authClient = new OktaAuth({
+                    url: oktaOrgUrl,
+                    clientId: oidcClientId,
+                    redirectUri: "https://oktadev.ngrok.io"
+                });
 
-		authClient.signIn({
-  			username: $scope.userName,
-  			password: $scope.password
-		})
-		.then(function(transaction) {
-			console.log("transaction = " + Object.prototype.toString.call(transaction));
-  			switch(transaction.status) {
-
-    			case 'SUCCESS':
-    				$scope.oktaSessionToken = transaction.sessionToken;
-				console.log("oktaSessionToken = " + $scope.oktaSessionToken);
-				console.log("Transaction status: " + transaction.status);
-				$scope.$apply();
-      				break;
-
-    			default:
-      				throw 'Error status' + transaction.status + ' was thrown';
-  			}
-		})
-		.fail(function(err) {
-  			console.error(err);
-  		})
-
-
-
-    }
-
-    $scope.logoutFunction = function() {
-             authClient.signOut()
-             .then(function(transaction)  {
-
-		   switch(transaction.status) {
-
-             	   case 'SUCCESS':
-
-                                console.log("Issued logout for session Token : " + $scope.oktaSessionToken);
-                                console.log("Transaction status: " + transaction.status);
-				$scope.oktaSessionToken = null;
-				$scope.$apply();
-                                break;
-
-                   default:
-                                throw 'Error status' + transaction.status + ' was thrown';
-                        }
+                authClient.signIn({
+                    username: $scope.userName,
+                    password: $scope.password
                 })
-                .fail(function(err) {
+                .then(function (transaction) {
+                    console.log("transaction = " + Object.prototype.toString.call(transaction));
+                    switch (transaction.status) {
+
+                        case 'SUCCESS':
+                            //authClient.session.setCookieAndRedirect(transaction.sessionToken); // Sets a cookie on redirect
+                            return authClient.idToken.authorize({
+                                sessionToken: transaction.sessionToken
+                            })
+                            .then(function (token) {
+                                console.log(token);
+                                console.log(token.claims);
+                                console.log(token.idToken);
+                            });
+                            console.log("ID Token:" + authClient.idToken);
+                            authClient.idToken.authorize().then(function (res) {
+                                console.log("ID Token from response" + res.idToken);
+                                console.log("Response claims" + res.claims);
+                            })
+                            $scope.oktaSessionToken = transaction.sessionToken;
+                            console.log("oktaSessionToken = " + $scope.oktaSessionToken);
+                            console.log("Transaction status: " + transaction.status);
+                            $scope.$apply();
+                            break;
+
+                        default:
+                            throw 'Error status' + transaction.status + ' was thrown';
+                    }
+                })
+                .fail(function (err) {
+                    console.error(err);
+                })
+
+
+
+            }
+
+            $scope.logoutFunction = function () {
+
+                authClient = new OktaAuth({ url: oktaOrgUrl });
+
+                authClient.signOut()
+                .then(function (transaction) {
+
+                    switch (transaction.status) {
+
+                        case 'SUCCESS':
+
+                            console.log("Issued logout for session Token : " + $scope.oktaSessionToken);
+                            console.log("Transaction status: " + transaction.status);
+                            $scope.oktaSessionToken = null;
+                            $scope.$apply();
+                            break;
+
+                        default:
+                            throw 'Error status' + transaction.status + ' was thrown';
+                    }
+                })
+                   .fail(function (err) {
+                       console.error(err);
+                   })
+
+            }
+
+            $scope.getUser = function () {
+
+                authClient = new OktaAuth({ url: oktaOrgUrl });
+
+                authClient.session.get()
+                    .then(function (session) {
+                        console.log('entered getUser function')
+                        return session.user()
+                        .then(function (user) {
+                            // do something with the user info
+                        });
+                    })
+                    .fail(function (err) {
                         console.error(err);
-                })
-
-    }
-
-
-});
+                    });
+            }
+        });
     </script>
-
-
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>

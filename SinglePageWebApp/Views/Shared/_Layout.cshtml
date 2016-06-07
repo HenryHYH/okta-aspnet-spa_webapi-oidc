@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Okta ASP.NET MVC Web API Authentication Sample</title>
     @Styles.Render("~/Content/css")
-   @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/js.cookie.js")
@@ -23,7 +23,7 @@
     <link rel="shortcut icon" href="/favicon.png">
 
     <link rel="stylesheet" href="https://lipis.github.io/bootstrap-social/bootstrap-social.css">
-    </head>
+</head>
 <body>
     <header>
         <div class="container">
@@ -44,65 +44,65 @@
             <div id="sign"><a href="/Home/Register"><i class="fa fa-user"></i><span>Register/Sign in</span></a></div>
         </div>
     </header>
-    
-        @RenderBody()
 
-        <footer>
-            <section class="twitter_feed_wrapper">
-                <div class="container">
-                    <div class="row wow animated fadeInUp">
-                        <div class="twitter_feed_icon col-sm-1 col-md-1"><a href="#twitter"><i class="fa fa-twitter"></i></a></div>
-                        <div class="col-sm-11 col-md-11">
-                            <blockquote>
-                                <p>Find out about our APIs and SDK by visiting our developer's site  <a href="http://developer.okta.com">http://developer.okta.com</a></p>
-                                — Okta (@@okta) <a href="https://twitter.com/okta/">April 4, 2016</a>
-                            </blockquote>
-                        </div>
+    @RenderBody()
+
+    <footer>
+        <section class="twitter_feed_wrapper">
+            <div class="container">
+                <div class="row wow animated fadeInUp">
+                    <div class="twitter_feed_icon col-sm-1 col-md-1"><a href="#twitter"><i class="fa fa-twitter"></i></a></div>
+                    <div class="col-sm-11 col-md-11">
+                        <blockquote>
+                            <p>Find out about our APIs and SDK by visiting our developer's site  <a href="http://developer.okta.com">http://developer.okta.com</a></p>
+                            — Okta (@@okta) <a href="https://twitter.com/okta/">April 4, 2016</a>
+                        </blockquote>
                     </div>
                 </div>
-            </section>
-            <section id="footer_teasers_wrapper">
-                <div class="container">
-                    <div class="row">
-                        <div class="footer_teaser col-sm-4 col-md-4">
-                            <h3>About us</h3>
-                            <p>Okta is the foundation for secure connections between people and technology.</p>
-                            <p><i class="fa fa-map-marker"></i> 301 Brannan St, San Francisco, CA 94107, USA</p>
-                            <p><i class="fa fa-phone"></i> 1-888-722-7871</p>
-                            <p><i class="fa fa-print"></i> 1-800-219-0964</p>
-                            <p><i class="fa fa-envelope"></i> developers@okta.com</p>
-                        </div>
-                        <div class="footer_teaser col-sm-4 col-md-4">
-                            <h3>Latest News</h3>
-                            <ul class="media-list">
-                                <li class="media">
-                                    <a href="#" class="media-photo" ></a> <a href="#" class="media-date">19<span>FEB</span></a>
-                                    <h5 class="media-heading"><a href="#">Media heading, this is a title of a news...</a></h5>
-                                    <p>Fugiat dapibus, tellus ac cursus commodo, ut fermentum...</p>
-                                </li>
-                                <li class="media">
-                                    <a href="#" class="media-photo" ></a> <a href="#" class="media-date">18<span>FEB</span></a>
-                                    <h5 class="media-heading"><a href="#">Media heading, of a news item.</a></h5>
-                                    <p>Fugiat dapibus, tellus ac cursus commodo, condime ntum nibh, ut fermentum...</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="footer_teaser col-sm-4 col-md-4" id="latest-flickr-images">
-                            <h3>FlickrFeed</h3>
-                            <ul></ul> <p></p>
-                        </div>
+            </div>
+        </section>
+        <section id="footer_teasers_wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="footer_teaser col-sm-4 col-md-4">
+                        <h3>About us</h3>
+                        <p>Okta is the foundation for secure connections between people and technology.</p>
+                        <p><i class="fa fa-map-marker"></i> 301 Brannan St, San Francisco, CA 94107, USA</p>
+                        <p><i class="fa fa-phone"></i> 1-888-722-7871</p>
+                        <p><i class="fa fa-print"></i> 1-800-219-0964</p>
+                        <p><i class="fa fa-envelope"></i> developers@okta.com</p>
+                    </div>
+                    <div class="footer_teaser col-sm-4 col-md-4">
+                        <h3>Latest News</h3>
+                        <ul class="media-list">
+                            <li class="media">
+                                <a href="#" class="media-photo"></a> <a href="#" class="media-date">19<span>FEB</span></a>
+                                <h5 class="media-heading"><a href="#">Media heading, this is a title of a news...</a></h5>
+                                <p>Fugiat dapibus, tellus ac cursus commodo, ut fermentum...</p>
+                            </li>
+                            <li class="media">
+                                <a href="#" class="media-photo"></a> <a href="#" class="media-date">18<span>FEB</span></a>
+                                <h5 class="media-heading"><a href="#">Media heading, of a news item.</a></h5>
+                                <p>Fugiat dapibus, tellus ac cursus commodo, condime ntum nibh, ut fermentum...</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer_teaser col-sm-4 col-md-4" id="latest-flickr-images">
+                        <h3>FlickrFeed</h3>
+                        <ul></ul> <p></p>
                     </div>
                 </div>
-            </section>
-            <section class="copyright">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6"> </div>
-                        <div class="text-right col-sm-6 col-md-6"> </div>
-                    </div>
+            </div>
+        </section>
+        <section class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6"> </div>
+                    <div class="text-right col-sm-6 col-md-6"> </div>
                 </div>
-            </section>
-        </footer>
+            </div>
+        </section>
+    </footer>
 
     <script src="//code.jquery.com/jquery-latest.min.js"></script>
     <script>window.jQuery || document.write('<script src="/js/jquery-1.9.0.min.js"><\/script>')</script>
@@ -117,4 +117,4 @@
     <script type="text/javascript" src="/js/snap.svg-min.js"></script>
     <script type="text/javascript" src="/js/restart_theme.js"></script>
     <script type="text/javascript" src="/js/collapser.js"></script>
-        
+</body>
