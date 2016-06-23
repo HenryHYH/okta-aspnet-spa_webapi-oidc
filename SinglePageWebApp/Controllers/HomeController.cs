@@ -32,7 +32,7 @@ namespace OktaMvcSample.Controllers
             return View();
         }
 
-        public ActionResult Register()
+        public ActionResult SignIn()
         {
             return View();
         }

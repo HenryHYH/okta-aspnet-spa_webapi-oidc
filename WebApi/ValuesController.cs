@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
-namespace Okta.Samples.OpenIdConnect.AspNet.Api.Controllers
+namespace Okta.Samples.OpenIDConnect.AspNet.Api.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ValuesController : ApiController
@@ -36,7 +36,7 @@ namespace Okta.Samples.OpenIdConnect.AspNet.Api.Controllers
                 ClaimsPrincipal principal = Thread.CurrentPrincipal as ClaimsPrincipal;// HttpContext.Current.User as ClaimsPrincipal;
                 login = principal.Claims.Where(c => c.Type == "preferred_username").First().Value;
             }
-            return this.Ok(string.Format("All good. You only get this message if you are authenticated (as {0}).", login));
+            return this.Ok(string.Format("All good. You only get this message if you are authenticated (as {0}) AND you belong to either the Marketing or Finance group(s).", login));
         }
     }
 }

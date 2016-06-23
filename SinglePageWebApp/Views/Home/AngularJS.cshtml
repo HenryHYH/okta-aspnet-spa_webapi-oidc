@@ -75,10 +75,11 @@
                             return authClient.idToken.authorize({
                                 sessionToken: transaction.sessionToken
                             })
-                            .then(function (token) {
-                                console.log(token);
-                                console.log(token.claims);
-                                console.log(token.idToken);
+                            .then(function (res) {
+                                console.log(res);
+                                console.log(res.claims);
+                                console.log(res.idToken);
+                                localStorage.setItem('id_token', res.idToken);
                             });
                             console.log("ID Token:" + authClient.idToken);
                             authClient.idToken.authorize().then(function (res) {

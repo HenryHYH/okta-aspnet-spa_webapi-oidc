@@ -35,6 +35,7 @@ function renderOktaWidget() {
 
 function showAuthUI(isAuthenticated, user_id) {
     if (isAuthenticated) {
+        $("#apicall-buttons").show();
         $('#navbar > ul').empty().append('<li><a id="logout" href="/logout">Sign out</a></li>');
         $('#logout').click(function (event) {
             event.preventDefault();
@@ -49,6 +50,7 @@ function showAuthUI(isAuthenticated, user_id) {
         }
     }
     else {
+        $("#apicall-buttons").hide();
         $('#navbar > ul').empty();
         $('#logged-in-message').hide();
         $('#logged-out-message').show();
@@ -86,9 +88,9 @@ function callSecureWebApi() {
         success: function (data) {
             $('#logged-in-res').text(data);
         },
-        error: function(textStatus, errorThrown) {
-        $('#logged-in-res').text("You must be logged in AND have the proper permissions to access this API endpoint");
-    }
+        error: function (textStatus, errorThrown) {
+            $('#logged-in-res').text("You must be logged in AND have the proper permissions to access this API endpoint");
+        }
     });
 }
 
@@ -140,13 +142,13 @@ function signOut() {
                 console.log('closing session ' + sessionId);
                 closeSession(function (success) {
                     console.log('Is session closed? ' + success);
-                    if(success)
+                    if (success)
                         renderOktaWidget();
                 })
             }
         }
     });
-   
+
 }
 
 function oktaSessionsMe(callBack) {
@@ -195,32 +197,91 @@ function oktaUsersMe(callBack) {
 }
 
 function closeSession(callback) {
+    //$.ajax({
+    //    type: "DELETE",
+    //    dataType: 'json',
+    //    url: oktaOrgUrl + "/api/v1/sessions/me",
+    //    xhrFields: {
+    //        withCredentials: true
+    //    },
+    //    success: function (data) {
+    //        console.log('success deleting session');
+    //        console.log(data);
+    //        console.log('removing session from sessionStorage');
+    //        sessionStorage.removeItem(sessionTokenKey);
+    //        console.log('removed session from sessionStorage');
+    //        console.log('removing user Login from sessionStorage');
+    //        sessionStorage.removeItem(userLoginKey);
+    //        console.log('removed user Login from sessionStorage');
+    //        console.log('removing id Token from sessionStorage');
+    //        sessionStorage.removeItem(idTokenKey);
+    //        console.log('removed id Token from sessionStorage');
+    //        $('#logged-in-res').text('');
+    //        return callback(true);
+    //    },
+    //    error: function (textStatus, errorThrown) {
+    //        console.log('error deleting session: ' + JSON.stringify(textStatus));
+    //        console.log(errorThrown);
+    //        return callback(false);
+    //    },
+    //    async: true
+    //});
+
     $.ajax({
-        type: "DELETE",
+        url: oktaOrgUrl + '/api/v1/sessions/me',
+        type: 'DELETE',
+        xhrFields: { withCredentials: true },
+        accept: 'application/json'
+    }).done(function (data, textStatus, xhr) {
+        console.log('DONE - data = ' + data + ' textStatus = ' + textStatus + ' xhr.status = ' + xhr.status);
+        return callback(true);
+    }).fail(function (xhr, textStatus, error) {
+        console.log('FAILED - error = ' + error + ' textStatus = ' + textStatus + ' xhr.status = ' + xhr.status);
+        return callback(false);
+               }
+               );
+    }
+
+function callRenewToken() {
+    oktaSignIn.idToken.refresh(null, function (token) {
+        console.log('New ID token: ', token);
+        return token;
+    });
+    //renewToken(function (token) {
+    //    console.log('New ID token: ' + token);
+    //    return token;
+    //});
+}
+
+function renewToken(callBack) {
+
+    var oauthAuthorizeRequestUrl = oktaOrgUrl
+        + "/oauth2/v1/authorize?client_id="
+        + oauthClientId
+        + "&redirect_uri="
+        + encodeURIComponent(window.location.protocol + "//" + window.location.hostname)
+        //+ "&sessionToken="
+        //+ sessionToken
+        + "&response_type=id_token&response_mode=fragment&state=testState&prompt=none&scope=openid%20profile%20email%20address%20phone";
+    $.ajax({
+        type: "GET",
         dataType: 'json',
-        url: oktaOrgUrl + "/api/v1/sessions/me",
+        url: oauthAuthorizeRequestUrl,
         xhrFields: {
             withCredentials: true
         },
         success: function (data) {
-            console.log('success deleting session');
+            console.log('got a new ID Token');
+            console.log("ID Token: ");
             console.log(data);
-            console.log('removing session from sessionStorage');
-            sessionStorage.removeItem(sessionTokenKey);
-            console.log('removed session from sessionStorage');
-            console.log('removing user Login from sessionStorage');
-            sessionStorage.removeItem(userLoginKey);
-            console.log('removed user Login from sessionStorage');
-            console.log('removing id Token from sessionStorage');
-            sessionStorage.removeItem(idTokenKey);
-            console.log('removed id Token from sessionStorage');
-            $('#logged-in-res').text('');
-            return callback(true);
+            //sessionStorage.setItem(sessionTokenKey, JSON.stringify(data));
+            return callBack(data);
+            //$('#logged-in-res').text(data);
         },
         error: function (textStatus, errorThrown) {
-            console.log('error deleting session: ' + JSON.stringify(textStatus));
-            console.log(errorThrown);
-            return callback(false);
+            console.log('error getting an ID Token: ' + errorThrown);
+            //$('#logged-in-res').text("You must be logged in to call this API");
+            return callBack(errorThrown);
         },
         async: true
     });

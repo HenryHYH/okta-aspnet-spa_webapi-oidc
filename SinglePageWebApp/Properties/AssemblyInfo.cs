@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OktaMvcSample")]
+[assembly: AssemblyTitle("Okta.Samples.OpenIdConnect.AspNet.Spa")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("OktaMvcSample")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCompany("Okta, Inc")]
+[assembly: AssemblyProduct("Okta Single Page Web App")]
+[assembly: AssemblyCopyright("Copyright ©  2016 Okta")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
