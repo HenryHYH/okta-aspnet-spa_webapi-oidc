@@ -118,7 +118,7 @@
             authParams: {
                 responseType: 'id_token',
                 responseMode: 'okta_post_message',
-                scope: ['openid', 'profile', 'email', 'address', 'phone'],
+                scope: ['openid', 'profile', 'email', 'address', 'phone', 'groups'],
             },
             features: {
                 rememberMe: true,
@@ -160,7 +160,7 @@
     var oktaSignIn = setupOktaSignIn(oktaOrgUrl, oauthClientId);
 
     $(document).ready(function () {
-        // defined in 'single-page.js'
+        // defined in 'Scripts/single-page.js'
         renderOktaWidget();
     });
 </script>

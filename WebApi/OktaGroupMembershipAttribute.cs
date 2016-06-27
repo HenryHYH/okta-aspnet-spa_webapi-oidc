@@ -1,12 +1,8 @@
-﻿using Okta.Core.Clients;
-using Okta.Core.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading;
-using System.Web;
 using System.Web.Http.Controllers;
 
 namespace Okta.Samples.OpenIDConnect.AspNet.Api.Controllers
@@ -28,28 +24,27 @@ namespace Okta.Samples.OpenIDConnect.AspNet.Api.Controllers
             bool isAuthorized = base.IsAuthorized(actionContext);
             if (isAuthorized)
             {
-                //process additional checks against Okta Universal Directory
                 if (Thread.CurrentPrincipal != null)
                 {
                     if (!string.IsNullOrEmpty(Groups))
                     {
                         List<string> lstGroupNames = Groups.Split(',').ToList<string>();
                         ClaimsPrincipal principal = Thread.CurrentPrincipal as ClaimsPrincipal;// HttpContext.Current.User as ClaimsPrincipal;
-                        string strUserName = principal.Claims.Where(c => c.Type == "preferred_username").First().Value;
+                        IEnumerable<Claim> groupsClaimEnum = principal.Claims.Where(c => c.Type == "groups");
+                        List<Claim> groupsClaim = null;
+                        if (groupsClaimEnum != null)
+                        {
+                            groupsClaim = groupsClaimEnum.ToList();
+
+                        }
                         try
                         {
-
-                            UsersClient usersClients = new UsersClient(ConfigurationManager.AppSettings["okta:ApiKey"], new Uri(ConfigurationManager.AppSettings["okta:TenantUrl"]));
-                            User currentOktaUser = usersClients.GetByUsername(strUserName);
-                            UserGroupsClient groupsClient = usersClients.GetUserGroupsClient(currentOktaUser);
-                            List<Group> groups = groupsClient.GetList(pageSize: 100).Results as List<Group>;
-
-                            if (groups != null && groups.Count > 0)
+                            if (groupsClaim != null && groupsClaim.Count > 0)
                             {
                                 int iFoundGroups = 0;
                                 foreach (string strGoupName in lstGroupNames)
                                 {
-                                    if (groups.Find(g => g.Profile.Name == strGoupName) != null)
+                                    if (groupsClaim.Find(g => g.Value == strGoupName) != null)
                                     {
                                         ++iFoundGroups;
                                     }
@@ -70,11 +65,6 @@ namespace Okta.Samples.OpenIDConnect.AspNet.Api.Controllers
                                         break;
                                 }
                             }
-                        }
-                        catch (Okta.Core.OktaException oex)
-                        {
-                            string strEx = oex.ErrorSummary;
-                            throw;
                         }
                         catch (Exception ex)
                         {
