@@ -1,9 +1,41 @@
-This document contains third party open source licenses and notices for the Okta OpenID Connect SPA Sample with Okta Auth SDK and Okta Sign-In Widget product. Certain licenses and notices may appear in other parts of the product in accordance with the applicable license requirements.
+This document contains third party open source licenses and notices for the Okta OpenID Connect Single Page Web App with ASP.NET Web API (Implicit Flow) product. Certain licenses and notices may appear in other parts of the product in accordance with the applicable license requirements.
 
 The Okta product that this document references does not necessarily use all the open source software packages referred to below and may also only use portions of a given package. 
 
 Third Party Notices
 -------------------
+
+ANTLR
+Version (if any):	3.4.1.9004
+Brief Description:	ANother Tool for Language Recognition, is a language tool that provides a framework for constructing recognizers, interpreters, compilers, and translators from grammatical descriptions containing actions in a variety of target languages.
+License:	BSD 3-Clause
+
+Copyright (c) 2010 Terence Parr.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+3. Neither the name of the author nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-----------------------------------------------------------------------------------
+
+Bootstrap
+Version (if any):	3.0.0
+Brief Description:	Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.
+License:	MIT
+
+Copyright (c) 2011-2016 Twitter, Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-----------------------------------------------------------------------------------
 
 CodeDOM Providers for .NET Compiler Platform
 Version (if any):	1.0.0
@@ -13,6 +45,34 @@ License:	Microsoft Software License
 Copyright (c) Microsoft Corporation. All rights reserved.
 
 See Open Source Licenses below for complete copy of the Microsoft Software license.
+-----------------------------------------------------------------------------------
+
+jQuery
+Version (if any):	1.10.2
+Brief Description:	jQuery is a fast and concise JavaScript Library that simplifies HTML document traversing, event handling, animating, and Ajax interactions for rapid web development. jQuery is designed to change the way that you write JavaScript.
+License:	MIT
+
+Copyright (c) jQuery Foundation, Inc. and other contributors.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-----------------------------------------------------------------------------------
+
+jQuery Validation
+Version (if any):	1.11.1
+Brief Description:	The jQuery Validation Plugin provides drop-in validation for your existing forms, while making all kinds of customizations to fit your application really easy.
+License:	MIT
+
+Copyright (c) Jörn Zaefferer.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -----------------------------------------------------------------------------------
 
 System.IdentityModel.Tokens.Jwt
@@ -33,7 +93,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 See Open Source Licenses below for complete copy of the Apache 2.0 license.
 -----------------------------------------------------------------------------------
 
-Microsoft ASP.NET Cross-Origin Support (Microsoft.AspNet.Cors)
+Microsoft ASP.NET Cross-Origin Support
 Version (if any):	5.2.3
 Brief Description:	This package contains the core components to enable Cross-Origin Resource Sharing (CORS) in ASP.NET.
 License:	Microsoft Software License
@@ -43,9 +103,9 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 See Open Source Licenses below for complete copy of the Microsoft Software license.
 -----------------------------------------------------------------------------------
 
-Microsoft ASP.NET Web API 2.2 Client (Microsoft.AspNet.WebApi.Client)
+Microsoft ASP.NET MVC
 Version (if any):	5.2.3
-Brief Description:	This package contains the core runtime assemblies for ASP.NET Web API. This package is used by hosts of the ASP.NET Web API runtime. To host a Web API in IIS use the Microsoft.AspNet.WebApi.WebHost package. To host a Web API in your own process use the Microsoft.AspNet.WebApi.SelfHost package.
+Brief Description:	This package contains the runtime assemblies for ASP.NET MVC. ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that enables a clean separation of concerns and that gives you full control over markup.
 License:	Microsoft Software License
 
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -53,19 +113,9 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 See Open Source Licenses below for complete copy of the Microsoft Software license.
 -----------------------------------------------------------------------------------
 
-Microsoft ASP.NET Web API 2.2 Core (Microsoft.AspNet.WebApi.Core)
-Version (if any):	5.2.3
-Brief Description:	This package adds support for formatting and content negotiation to System.Net.Http. It includes support for JSON, XML, and form URL encoded data.
-License:	Microsoft Software License
-
-Copyright (c) Microsoft Corporation. All rights reserved.
-
-See Open Source Licenses below for complete copy of the Microsoft Software license.
-
-
-Microsoft ASP.NET Web API 2.2 Cors (Microsoft.AspNet.WebApi.Cors)
-Version (if any):	5.2.3
-Brief Description:	This package contains the components to enable Cross-Origin Resource Sharing (CORS) in ASP.NET Web API.
+Microsoft ASP.NET Razor
+Version (if any):	3.2.0
+Brief Description:	This package contains the runtime assemblies for ASP.NET Web Pages. ASP.NET Web Pages and the new Razor syntax provide a fast, terse, clean and lightweight way to combine server code with HTML to create dynamic web content.
 License:	Microsoft Software License
 
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -73,27 +123,7 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 See Open Source Licenses below for complete copy of the Microsoft Software license.
 -----------------------------------------------------------------------------------
 
-Microsoft ASP.NET Web API 2.2 OWIN (Microsoft.AspNet.WebApi.Owin)
-Version (if any):	5.2.3
-Brief Description:	This package allows you to host ASP.NET Web API within an OWIN server and provides access to additional OWIN features.
-License:	Microsoft Software License
-
-Copyright (c) Microsoft Corporation. All rights reserved.
-
-See Open Source Licenses below for complete copy of the Microsoft Software license.
------------------------------------------------------------------------------------
-
-Microsoft ASP.NET Web API 2.2 OWIN Self Host (Microsoft.AspNet.WebApi.OwinSelfHost)
-Version (if any):	5.2.3
-Brief Description:	This package allows you to host ASP.NET Web API within your own process using the OWIN HttpListener server. ASP.NET Web API is a framework that makes it easy to build HTTP services that reach a broad range of clients, including browsers and mobile devices. ASP.NET Web API is an ideal platform for building RESTful applications on the .NET Framework.
-License:	Microsoft Software License
-
-Copyright (c) Microsoft Corporation. All rights reserved.
-
-See Open Source Licenses below for complete copy of the Microsoft Software license.
------------------------------------------------------------------------------------
-
-Microsoft ASP.NET Web API 2.2 Host (Microsoft.AspNet.WebApi.WebHost)
+Microsoft ASP.NET Web API 2.2
 Version (if any):	5.2.3
 Brief Description:	This package contains everything you need to host ASP.NET Web API on IIS. ASP.NET Web API is a framework that makes it easy to build HTTP services that reach a broad range of clients, including browsers and mobile devices. ASP.NET Web API is an ideal platform for building RESTful applications on the .NET Framework.
 License:	Microsoft Software License
@@ -103,8 +133,88 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 See Open Source Licenses below for complete copy of the Microsoft Software license.
 -----------------------------------------------------------------------------------
 
-Microsoft BCL Build Components (Microsoft.Bcl.Build)
-Version (if any):	1.0.21
+Microsoft ASP.NET Web API 2.2 Client
+Version (if any):	5.2.3
+Brief Description:	This package contains the core runtime assemblies for ASP.NET Web API. This package is used by hosts of the ASP.NET Web API runtime. To host a Web API in IIS use the Microsoft.AspNet.WebApi.WebHost package. To host a Web API in your own process use the Microsoft.AspNet.WebApi.SelfHost package.
+License:	Microsoft Software License
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+See Open Source Licenses below for complete copy of the Microsoft Software license.
+-----------------------------------------------------------------------------------
+
+Microsoft ASP.NET Web API 2.2 Core
+Version (if any):	5.2.3
+Brief Description:	This package adds support for formatting and content negotiation to System.Net.Http. It includes support for JSON, XML, and form URL encoded data.
+License:	Microsoft Software License
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+See Open Source Licenses below for complete copy of the Microsoft Software license.
+-----------------------------------------------------------------------------------
+
+Microsoft ASP.NET Web API 2.2 Cors
+Version (if any):	5.2.3
+Brief Description:	This package contains the components to enable Cross-Origin Resource Sharing (CORS) in ASP.NET Web API.
+License:	Microsoft Software License
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+See Open Source Licenses below for complete copy of the Microsoft Software license.
+-----------------------------------------------------------------------------------
+
+Microsoft ASP.NET Web API 2.2 Help Page
+Version (if any):	5.2.3
+Brief Description:	The ASP.NET Web API Help Page automatically generates help page content for the web APIs on your site. Visitors to your help page can use this content to learn how to call your web APIs. Everything generated by the help page is fully customizable using ASP.NET MVC and Razor. ASP.NET Web API Help Page is a great addition to any ASP.NET Web API project.
+License:	Microsoft Software License
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+See Open Source Licenses below for complete copy of the Microsoft Software license.
+-----------------------------------------------------------------------------------
+
+Microsoft ASP.NET Web API 2.2 Host
+Version (if any):	5.2.3
+Brief Description:	This package contains everything you need to host ASP.NET Web API on IIS. ASP.NET Web API is a framework that makes it easy to build HTTP services that reach a broad range of clients, including browsers and mobile devices. ASP.NET Web API is an ideal platform for building RESTful applications on the .NET Framework.
+License:	Microsoft Software License
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+See Open Source Licenses below for complete copy of the Microsoft Software license.
+-----------------------------------------------------------------------------------
+
+Microsoft ASP.NET Web Optimization
+Version (if any):	1.1.3
+Brief Description:	ASP.NET Optimization introduces a way to bundle and optimize CSS and JavaScript files.
+License:	Microsoft Software License
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+See Open Source Licenses below for complete copy of the Microsoft Software license.
+-----------------------------------------------------------------------------------
+
+Microsoft ASP.NET Web API 2.2 Web Pages
+Version (if any):	3.2.3
+Brief Description:	This package contains core runtime assemblies shared between ASP.NET MVC and ASP.NET Web Pages.
+License:	Microsoft Software License
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+See Open Source Licenses below for complete copy of the Microsoft Software license.
+-----------------------------------------------------------------------------------
+
+Microsoft ASP.NET Web API 2.2 Web Pages
+Version (if any):	3.2.3
+Brief Description:	This package contains core runtime assemblies shared between ASP.NET MVC and ASP.NET Web Pages.
+License:	Microsoft Software License
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+See Open Source Licenses below for complete copy of the Microsoft Software license.
+-----------------------------------------------------------------------------------
+
+Microsoft BCL Build Components
+Version (if any):	1.0.14
 Brief Description:	This package provides build infrastructure components so that projects referencing specific Microsoft packages can successfully build.
 License:	Microsoft Software License
 
@@ -113,8 +223,8 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 See Open Source Licenses below for complete copy of the Microsoft Software license.
 -----------------------------------------------------------------------------------
 
-Microsoft BCL Portability Pack (Microsoft.Bcl)
-Version (if any):	1.1.10
+Microsoft BCL Portability Pack
+Version (if any):	1.1.9
 Brief Description:	This packages enables projects targeting down-level platforms to use some of the types added in later versions.
 License:	Microsoft Software License
 
@@ -123,8 +233,8 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 See Open Source Licenses below for complete copy of the Microsoft Software license.
 -----------------------------------------------------------------------------------
 
-Microsoft HTTP Client Libraries (Microsoft.Net.Http)
-Version (if any):	2.2.29
+Microsoft HTTP Client Libraries
+Version (if any):	2.2.28
 Brief Description:	This package includes HttpClient for sending requests over HTTP, as well as HttpRequestMessage and HttpResponseMessage for processing HTTP messages.
 License:	Microsoft Software License
 
@@ -133,8 +243,18 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 See Open Source Licenses below for complete copy of the Microsoft Software license.
 -----------------------------------------------------------------------------------
 
+Microsoft jQuery Unobtrusive Validation
+Version (if any):	3.2.3
+Brief Description:	jQuery plugin that unobtrusively sets up jQuery.Validation.
+License:	Microsoft Software License
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+See Open Source Licenses below for complete copy of the Microsoft Software license.
+-----------------------------------------------------------------------------------
+
 Microsoft.Net.Compilers
-Version (if any):	1.3.2
+Version (if any):	1.0.0
 Brief Description:	.Net Compilers package. Referencing this package will cause the project to be built using the specific version of the C# and Visual Basic compilers contained in the package, as opposed to any system installed version.
 License:	Microsoft Software License
 
@@ -143,105 +263,28 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 See Open Source Licenses below for complete copy of the Microsoft Software license.
 -----------------------------------------------------------------------------------
 
-Microsoft.Owin
-Version (if any):	3.0.1
-Brief Description:	Provides a set of helper types and abstractions for simplifying the creation of OWIN components.
-License:	Microsoft Software License
-
-Copyright (c) Microsoft Corporation. All rights reserved.
-
-See Open Source Licenses below for complete copy of the Microsoft Software license.
------------------------------------------------------------------------------------
-
-Microsoft.Owin.Host.HttpListener
-Version (if any):	3.0.1
-Brief Description:	OWIN server built on the .NET Framework's HttpListener class. Currently the default server used for self-hosting.
-License:	Microsoft Software License
-
-Copyright (c) Microsoft Corporation. All rights reserved.
-
-See Open Source Licenses below for complete copy of the Microsoft Software license.
------------------------------------------------------------------------------------
-
-Microsoft.Owin.Host.SystemWeb
-Version (if any):	3.0.1
-Brief Description:	OWIN server that enables OWIN-based applications to run on IIS using the ASP.NET request pipeline.
-License:	Microsoft Software License
-
-Copyright (c) Microsoft Corporation. All rights reserved.
-
-See Open Source Licenses below for complete copy of the Microsoft Software license.
------------------------------------------------------------------------------------
-
-Microsoft.Owin.Hosting
-Version (if any):	3.0.1
-Brief Description:	Provides default infrastructure types for hosting and running OWIN-based applications.
-License:	Microsoft Software License
-
-Copyright (c) Microsoft Corporation. All rights reserved.
-
-See Open Source Licenses below for complete copy of the Microsoft Software license.
------------------------------------------------------------------------------------
-
-Microsoft.Owin.Security
-Version (if any):	3.0.1
-Brief Description:	Provides default infrastructure types for hosting and running OWIN-based applications.	
-License:	Microsoft Software License
-
-Copyright (c) Microsoft Corporation. All rights reserved.
-
-See Open Source Licenses below for complete copy of the Microsoft Software license.
------------------------------------------------------------------------------------
-
-Microsoft.Owin.Security.Jwt
-Version (if any):	3.0.1
-Brief Description:	Middleware that enables an application to protect and validate JSON Web Tokens.
-License:	Microsoft Software License
-
-Copyright (c) Microsoft Corporation. All rights reserved.
-
-See Open Source Licenses below for complete copy of the Microsoft Software license.
------------------------------------------------------------------------------------
-
-Microsoft.Owin.Security.OAuth
-Version (if any):	3.0.1
-Brief Description:	Middleware that enables an application to support any standard OAuth 2.0 authentication workflow.
-License:	Microsoft Software License
-
-Copyright (c) Microsoft Corporation. All rights reserved.
-
-See Open Source Licenses below for complete copy of the Microsoft Software license.
------------------------------------------------------------------------------------
-
-Identity Protocol Extensions for the Microsoft .NET Framework 4.5
-(Microsoft.IdentityModel.Protocol.Extensions)
-Version (if any):	1.0.2.206221351
-Brief Description:	This package provides an assembly containing classes which extend the .NET Framework 4.5 with base constructs from the OpenId Connect and WS-Federation protocols.
-License:	Apache 2.0
-
-Copyright (c) Microsoft Corporation. All rights reserved.
-
-See Open Source Licenses below for complete copy of the Apache 2.0 license.
------------------------------------------------------------------------------------
-
-Microsoft.IdentityModel.Logging
+Microsoft.Web.Infrastructure
 Version (if any):	1.0.0
-Brief Description:	Includes Event Source based logging support..
-License:	Apache 2.0
-
-Copyright (c) Microsoft Corporation. All rights reserved.
-
-See Open Source Licenses below for complete copy of the Apache 2.0 license.
------------------------------------------------------------------------------------
-
-Owin
-Version (if any):	1.0.0
-Brief Description:	OWIN IAppBuilder startup interface.
+Brief Description:	This package contains the Microsoft.Web.Infrastructure assembly that lets you dynamically register HTTP modules at run time.
 License:	Microsoft Software License
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
 See Open Source Licenses below for complete copy of the Microsoft Software license.
+-----------------------------------------------------------------------------------
+
+Modernizr
+Version (if any):	2.6.2
+Brief Description:	Modernizr is a small piece of JavaScript code that automatically detects the availability of next-generation web technologies in your user's browsers.
+License:	MIT
+
+Copyright (c) 2009-2016.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -----------------------------------------------------------------------------------
 
 Newtonsoft.Json
@@ -258,9 +301,33 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -----------------------------------------------------------------------------------
 
+Respond
+Version (if any):	1.2.0
+Brief Description:	A fast & lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more).
+License:	MIT
+
+Copyright (c) 2011 Scott Jehl, scottjehl.com.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-----------------------------------------------------------------------------------
+
+WebGrease
+Version (if any):	1.5.2
+Brief Description:	Web Grease is a suite of tools for optimizing javascript, css files and images.
+License:	Microsoft Software License
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+See Open Source Licenses below for complete copy of the Microsoft Software license.
+-----------------------------------------------------------------------------------
+
 
 Open Source Licenses
----------------------
+--------------------
 
 APACHE LICENSE
 
@@ -402,4 +469,3 @@ GPL Licensed Software
 
 If applicable and to the extent any open source components are licensed under the GPL and/or LGPL, or other similar license that require the source code and/or modifications to source code to be made available (as noted above), a copy of the source code corresponding to the binaries for such open source components and modifications thereto, if any, may be obtained by downloading the source code or by sending a request, with your name and address to: Okta, Inc., 301 Brannan Street, Suite 100, San Francisco, CA 94107. All open source requests should clearly specify: OPEN SOURCE REQUEST, Attention General Counsel and the name of the requested component and Okta product. Okta will mail a copy of the source code to you on a CD or equivalent physical medium. This offer to obtain a copy of the source code is valid for three (3) years from the date you acquired this Okta product. Alternatively, the open source may accompany the Okta product.
 
-		
