@@ -13,7 +13,7 @@ function renderOktaWidget() {
                 function (res) {
                     if (res.status === 'SUCCESS') {
                         console.log(res);
-                        var id_token = res.id_token || res.idToken;
+                        var id_token =  res.idToken;
                         console.log('id token: ' + id_token);
                         sessionStorage.setItem(idTokenKey, id_token);
                         sessionStorage.setItem(userLoginKey, res.claims.preferred_username);
@@ -24,10 +24,16 @@ function renderOktaWidget() {
             );
         }
         else {
+            var id_token = sessionStorage.getItem(idTokenKey);
+            if (id_token == null) {
+                console.log('calling renewToken');
+                callRenewToken();
+            }
             var userLogin = sessionStorage.getItem(userLoginKey);
             if (userLogin) {
                 console.log('user Login is ' + userLogin);
             }
+
             showAuthUI(true, userLogin);
         }
     });
@@ -65,7 +71,7 @@ function callUnsecureWebApi() {
     $.ajax({
         type: "GET",
         dataType: 'json',
-        url: webApiRootUrl + "/hello",
+        url: webApiRootUrl + "/unprotected",
         success: function (data) {
             console.log(data);
             $('#logged-in-res').text(data);
@@ -77,7 +83,7 @@ function callSecureWebApi() {
     $.ajax({
         type: "GET",
         dataType: 'json',
-        url: webApiRootUrl + "/secure/hello",
+        url: webApiRootUrl + "/protected",
         beforeSend: function (xhr) {
             var id_token = sessionStorage.getItem(idTokenKey);
             console.log("callSecureWebApi ID Token: " + id_token);
@@ -130,7 +136,6 @@ function callSessionsMe() {
     });
 }
 
-
 function signOut() {
     console.log('signing out');
     oktaSessionsMe(function (authenticated) {
@@ -178,7 +183,6 @@ function oktaSessionsMe(callBack) {
     });
 }
 
-
 function oktaUsersMe(callBack) {
     $.ajax({
         type: "GET",
@@ -199,36 +203,6 @@ function oktaUsersMe(callBack) {
 }
 
 function closeSession(callback) {
-    //$.ajax({
-    //    type: "DELETE",
-    //    dataType: 'json',
-    //    url: oktaOrgUrl + "/api/v1/sessions/me",
-    //    xhrFields: {
-    //        withCredentials: true
-    //    },
-    //    success: function (data) {
-    //        console.log('success deleting session');
-    //        console.log(data);
-    //        console.log('removing session from sessionStorage');
-    //        sessionStorage.removeItem(sessionTokenKey);
-    //        console.log('removed session from sessionStorage');
-    //        console.log('removing user Login from sessionStorage');
-    //        sessionStorage.removeItem(userLoginKey);
-    //        console.log('removed user Login from sessionStorage');
-    //        console.log('removing id Token from sessionStorage');
-    //        sessionStorage.removeItem(idTokenKey);
-    //        console.log('removed id Token from sessionStorage');
-    //        $('#logged-in-res').text('');
-    //        return callback(true);
-    //    },
-    //    error: function (textStatus, errorThrown) {
-    //        console.log('error deleting session: ' + JSON.stringify(textStatus));
-    //        console.log(errorThrown);
-    //        return callback(false);
-    //    },
-    //    async: true
-    //});
-
     $.ajax({
         url: oktaOrgUrl + '/api/v1/sessions/me',
         type: 'DELETE',
@@ -247,44 +221,8 @@ function closeSession(callback) {
 function callRenewToken() {
     oktaSignIn.idToken.refresh(null, function (token) {
         console.log('New ID token: ', token);
+        sessionStorage.setItem(idTokenKey, token);
+        sessionStorage.setItem(userLoginKey, token.claims.preferred_username);
         return token;
-    });
-    //renewToken(function (token) {
-    //    console.log('New ID token: ' + token);
-    //    return token;
-    //});
-}
-
-function renewToken(callBack) {
-
-    var oauthAuthorizeRequestUrl = oktaOrgUrl
-        + "/oauth2/v1/authorize?client_id="
-        + oauthClientId
-        + "&redirect_uri="
-        + encodeURIComponent(window.location.protocol + "//" + window.location.hostname)
-        //+ "&sessionToken="
-        //+ sessionToken
-        + "&response_type=id_token&response_mode=fragment&state=testState&prompt=none&scope=openid%20profile%20email%20address%20phone";
-    $.ajax({
-        type: "GET",
-        dataType: 'json',
-        url: oauthAuthorizeRequestUrl,
-        xhrFields: {
-            withCredentials: true
-        },
-        success: function (data) {
-            console.log('got a new ID Token');
-            console.log("ID Token: ");
-            console.log(data);
-            //sessionStorage.setItem(sessionTokenKey, JSON.stringify(data));
-            return callBack(data);
-            //$('#logged-in-res').text(data);
-        },
-        error: function (textStatus, errorThrown) {
-            console.log('error getting an ID Token: ' + errorThrown);
-            //$('#logged-in-res').text("You must be logged in to call this API");
-            return callBack(errorThrown);
-        },
-        async: true
     });
 }

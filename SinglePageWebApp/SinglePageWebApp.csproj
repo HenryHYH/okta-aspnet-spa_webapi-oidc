@@ -141,9 +141,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\acme_logo.png" />
     <Content Include="images\git.png" />
     <Content Include="images\less.png" />
     <Content Include="images\okta.png" />
+    <Content Include="images\portfolio\a5.jpg" />
+    <Content Include="images\portfolio\p1.jpg" />
+    <Content Include="images\portfolio\p4.jpg" />
     <Content Include="images\responsive.png" />
     <Content Include="images\SFbayBridge.jpg" />
     <Content Include="images\star.png" />
@@ -260,7 +264,6 @@
     <Content Include="twitter-bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="twitter-bootstrap\js\bootstrap.js" />
     <Content Include="twitter-bootstrap\js\bootstrap.min.js" />
-    <Content Include="Views\Home\AngularJS.cshtml" />
     <Content Include="twitter-bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="twitter-bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="twitter-bootstrap\fonts\glyphicons-halflings-regular.woff" />

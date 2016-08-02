@@ -27,11 +27,6 @@ namespace OktaMvcSample.Controllers
             return View();
         }
 
-        public ActionResult AngularJS()
-        {
-            return View();
-        }
-
         public ActionResult SignIn()
         {
             return View();

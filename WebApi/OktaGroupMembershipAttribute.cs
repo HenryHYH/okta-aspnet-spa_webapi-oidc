@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Security.Claims;
 using System.Threading;
 using System.Web.Http.Controllers;
@@ -9,15 +12,7 @@ namespace Okta.Samples.OpenIDConnect.AspNet.Api.Controllers
 {
     public class OktaGroupAuthorizeAttribute : System.Web.Http.AuthorizeAttribute
     {
-        public bool ByPassAuthorization { get; set; }
-        public string Groups { get; set; }
-
         public GroupPolicy Policy { get; set; }
-
-        protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
-        {
-            base.HandleUnauthorizedRequest(actionContext);
-        }
 
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
@@ -26,9 +21,10 @@ namespace Okta.Samples.OpenIDConnect.AspNet.Api.Controllers
             {
                 if (Thread.CurrentPrincipal != null)
                 {
-                    if (!string.IsNullOrEmpty(Groups))
+                    string strGroups = System.Web.Configuration.WebConfigurationManager.AppSettings["okta:RequiredGroupMemberships"];
+                    if (!string.IsNullOrEmpty(strGroups))
                     {
-                        List<string> lstGroupNames = Groups.Split(',').ToList<string>();
+                        List<string> lstGroupNames = strGroups.Split(',').ToList<string>();
                         ClaimsPrincipal principal = Thread.CurrentPrincipal as ClaimsPrincipal;// HttpContext.Current.User as ClaimsPrincipal;
                         IEnumerable<Claim> groupsClaimEnum = principal.Claims.Where(c => c.Type == "groups");
                         List<Claim> groupsClaim = null;
@@ -65,6 +61,10 @@ namespace Okta.Samples.OpenIDConnect.AspNet.Api.Controllers
                                         break;
                                 }
                             }
+                            else
+                            {
+                                isAuthorized = false;
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -87,20 +87,64 @@ namespace Okta.Samples.OpenIDConnect.AspNet.Api.Controllers
             return isAuthorized;
         }
 
-        //protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
-        //{
-        //    actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Forbidden);
-        //    if (!string.IsNullOrEmpty(_responseReason))
-        //        actionContext.Response.ReasonPhrase = _responseReason;
-        //}
-        //private IEnumerable<OktaGroupAuthorizeAttribute> GetApiAuthorizeAttributes(HttpActionDescriptor descriptor)
-        //{
-        //    return descriptor.GetCustomAttributes<OktaGroupAuthorizeAttribute>(true)
-        //        .Concat(descriptor.ControllerDescriptor.GetCustomAttributes<OktaGroupAuthorizeAttribute>(true));
-        //}
+        protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
+        {
+            var tokenHasExpired = false;
+            base.HandleUnauthorizedRequest(actionContext);
 
+            var owinContext = actionContext.Request.GetOwinContext();
+            if (owinContext != null)
+            {
+                tokenHasExpired = owinContext.Environment.ContainsKey("oauth.token_expired");
+            }
+            if (tokenHasExpired)
+            {
+                actionContext.Response = new AuthenticationFailureMessage("unauthorized", actionContext.Request,
+                    new
+                    {
+                        error = "invalid_token",
+                        error_message = "The Token has expired"
+                    });
+            }
+            else
+            {
+                if (owinContext.Authentication.User != null)
+                {
+                    actionContext.Response = new AuthenticationFailureMessage("unauthorized", actionContext.Request,
+                        new
+                        {
+                            error = "validation_error",
+                            error_message = string.Format("The user could be found in the JWT claims (userid: {0}) but the JWT itself is invalid, most likely because it doesn't contain the proper groups claim value.", owinContext.Authentication.User.Claims.ElementAt(4))
+                        });
+                }
+
+                else
+                {
+                    actionContext.Response = new AuthenticationFailureMessage("unauthorized", actionContext.Request,
+                        new
+                        {
+                            error = "invalid_user",
+                            error_message = "The user could not be found, so most likely the user claims could not be extracted from the token you sent"
+                        });
+                }
+            }
+        }
 
     }
+
+    public class AuthenticationFailureMessage : HttpResponseMessage
+    {
+        public AuthenticationFailureMessage(string reasonPhrase, HttpRequestMessage request, object responseMessage)
+            : base(HttpStatusCode.Unauthorized)
+        {
+            MediaTypeFormatter jsonFormatter = new JsonMediaTypeFormatter();
+
+            Content = new ObjectContent<object>(responseMessage, jsonFormatter);
+            RequestMessage = request;
+            ReasonPhrase = reasonPhrase;
+        }
+    }
+
 
     public enum GroupPolicy
     {

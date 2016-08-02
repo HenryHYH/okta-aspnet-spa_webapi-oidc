@@ -13,5 +13,11 @@ namespace Okta.Samples.OpenIDConnect.AspNet.Api
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
+
+        //protected void Application_BeginRequest(object sender, EventArgs e)
+        //{
+        //    HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
+        //    HttpContext.Current.Response.AddHeader("Access-Control-Allow-Credentials", "true");
+        //}
     }
 }

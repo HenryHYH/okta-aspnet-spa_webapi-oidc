@@ -11,11 +11,11 @@ using System.Web.Http.Cors;
 
 namespace Okta.Samples.OpenIDConnect.AspNet.Api.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "Accept, Authorization", methods: "GET, OPTIONS")]
     public class ValuesController : ApiController
     {
         [HttpGet]
-        [Route("hello")]
+        [Route("unprotected")]
         public IHttpActionResult NotSecured()
         {
             return this.Ok("All good. You don't need to be authenticated to call this.");
@@ -24,9 +24,9 @@ namespace Okta.Samples.OpenIDConnect.AspNet.Api.Controllers
         /*
         [Authorize]
         */
-        [OktaGroupAuthorize(Groups = "Marketing,Finance", Policy = GroupPolicy.All)]
+        [OktaGroupAuthorize( Policy = GroupPolicy.Any)]
         [HttpGet]
-        [Route("secure/hello")]
+        [Route("protected")]
 
         public IHttpActionResult Secured()
         {
