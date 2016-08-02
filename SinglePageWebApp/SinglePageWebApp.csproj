@@ -340,7 +340,6 @@
     <Content Include="twitter-bootstrap\less\utilities.less" />
     <Content Include="twitter-bootstrap\less\variables.less" />
     <Content Include="twitter-bootstrap\less\wells.less" />
-    <Content Include="Views\Shared\_Layout - Original.cshtml" />
     <Content Include="Views\Home\SignIn.cshtml" />
     <None Include="Web.config">
       <SubType>Designer</SubType>

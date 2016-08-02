@@ -1,4 +1,17 @@
-﻿var idTokenKey = 'idToken';
+﻿/*!
+ * Copyright (c) 2016, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+
+var idTokenKey = 'idToken';
 var sessionTokenKey = 'sessionToken';
 var userLoginKey = 'userLogin';
 
@@ -13,7 +26,7 @@ function renderOktaWidget() {
                 function (res) {
                     if (res.status === 'SUCCESS') {
                         console.log(res);
-                        var id_token =  res.idToken;
+                        var id_token = res.idToken;
                         console.log('id token: ' + id_token);
                         sessionStorage.setItem(idTokenKey, id_token);
                         sessionStorage.setItem(userLoginKey, res.claims.preferred_username);
@@ -149,8 +162,10 @@ function signOut() {
                 console.log('closing session ' + sessionId);
                 closeSession(function (success) {
                     console.log('Is session closed? ' + success);
-                    if (success)
+                    if (success) {
+                        location.reload(false);
                         renderOktaWidget();
+                    }
                 })
             }
         }
@@ -214,9 +229,9 @@ function closeSession(callback) {
     }).fail(function (xhr, textStatus, error) {
         console.log('FAILED - error = ' + error + ' textStatus = ' + textStatus + ' xhr.status = ' + xhr.status);
         return callback(false);
-               }
-               );
     }
+               );
+}
 
 function callRenewToken() {
     oktaSignIn.idToken.refresh(null, function (token) {
